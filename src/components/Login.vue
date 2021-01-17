@@ -30,27 +30,24 @@ export default {
     password: "",
   }),
   methods: {
-    signIn(login, password) {
-      console.log(login, password);
+    async signIn(login, password) {
       const axios = require("axios");
-      axios
-        .get("https://5fe22f647a94870017682293.mockapi.io/Users", {
+      await axios
+        .get("https://5ffdc17fd9ddad0017f687fc.mockapi.io/api/v1/users", {
           params: {
             email: login,
           },
         })
         .then(function (response) {
-          const userResponse = response.data[0]
-          if (userResponse.password!=password) {
+          const userResponse = response.data[0];
+          if (userResponse.password != password) {
             console.log("Senha inválida");
+          } else {
+            this.$emit('autenticated', true)
           }
-          console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
-        })
-        .then(function () {
-          // always executed
         });
     },
   },

@@ -15,7 +15,7 @@
 
     <!-- Provides the application the proper gutter -->
     <v-container fluid>
-      <login/>
+      <login v-if="!isAutenticated" @autenticated="autenticated"/>
       <!-- If using vue-router -->
     </v-container>
   </v-main>
@@ -38,7 +38,12 @@ export default {
   },
 
   data: () => ({
-    //
+    isAutenticated: false,
   }),
+  methods: {
+    autenticated(autenticated) {
+      this.isAutenticated=autenticated;
+    }
+  }
 };
 </script>
